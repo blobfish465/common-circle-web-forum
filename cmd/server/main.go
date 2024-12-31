@@ -11,7 +11,7 @@ import (
 func main() {
 	r := router.Setup()
 
-	fmt.Print("Listening on port 8080 at http://0.0.0.0:8080!")
+	fmt.Print("Listening on port 8000 at http://localhost:8000!")
 
-	log.Fatalln(http.ListenAndServe("0.0.0.0:8080", r))
+	log.Fatalln(http.ListenAndServe(":8000", r))
 }

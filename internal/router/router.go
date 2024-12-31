@@ -14,7 +14,7 @@ func Setup() chi.Router {
 	// To allow cross origin requests, between localhost3000 frontend and localhost8000 backend
 	// set up CORS(Cross-Origin Resource Sharing) middleware
 	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{"https://master.d2th4rpup0ppnv.amplifyapp.com", "http://localhost:3000"}, // Frontend URL
+		AllowedOrigins:   []string{"https://unique-brioche-acdf26.netlify.app/"}, // Frontend URL
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization"},
 		AllowCredentials: true, // Allow cookies and other credentials
