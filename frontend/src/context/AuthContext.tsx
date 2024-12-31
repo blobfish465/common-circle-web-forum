@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }, []);
 
     const login = async (username: string, password: string) => {
-        const response = await fetch('https://unique-brioche-acdf26.netlify.app/login', {
+        const response = await fetch('https://common-circle-web-forum.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
