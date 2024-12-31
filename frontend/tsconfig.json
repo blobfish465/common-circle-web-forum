@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+      "target": "es5",                           // or "es6" for modern JavaScript
+      "lib": ["dom", "esnext"],                  // Include necessary libraries
+      "allowJs": true,                           // Allows JavaScript files to be compiled
+      "skipLibCheck": true,                      // Skips type checking of declaration files for faster build
+      "esModuleInterop": true,                   // Enables interop between CommonJS and ES Modules
+      "strict": true,                            // Enables strict type checking options
+      "module": "esnext",                        // Can be "commonjs" or "esnext"
+      "moduleResolution": "node",                // Resolves modules in a way that mimics Node.js
+      "resolveJsonModule": true,                 // Allows importing JSON modules
+      "jsx": "react",                            // Enables JSX support
+      "noEmit": true,                            // Prevents emitting output (if you're using a bundler like Webpack)
+      "baseUrl": ".",                            // Base directory for non-relative imports
+      "paths": {
+        "*": ["node_modules/*", "src/*"]         // Custom paths to resolve modules
+      }
+    },
+    "include": [
+      "src/**/*"                                 // Includes all files in the src directory
+    ],
+    "exclude": [
+      "node_modules",                           // Excludes node_modules folder
+      "build",                                  // Excludes build directory if you use one
+      "dist"                                    // Excludes dist directory if you use one
+    ]
+  }
+  
