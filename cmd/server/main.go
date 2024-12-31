@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"net/http"
 
 	"github.com/blobfish465/common-circle-web-forum/internal/router"
