@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8000',
+    baseURL: 'https://common-circle-web-forum.onrender.com',
     headers: {
         'Content-Type': 'application/json',
     },

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"net/http"
 
 	"github.com/blobfish465/common-circle-web-forum/internal/router"
@@ -11,7 +12,12 @@ import (
 func main() {
 	r := router.Setup()
 
-	fmt.Print("Listening on port 8000 at http://localhost:8000!")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000" // Default to port 8000 if PORT is not set
+		// to ensure backend still works locally when running outside Render.
+	}
 
-	log.Fatalln(http.ListenAndServe(":8000", r))
+	fmt.Printf("Listening on port %s at http://0.0.0.0:%s!\n", port, port)
+	log.Fatalln(http.ListenAndServe(":"+port, r))
 }
