@@ -20,7 +20,7 @@ type Claims struct {
 // init loads the .env file and initializes jwtSecret with the JWT_SECRET environment variable.
 func init() {
 	// Load environment variables from .env file
-	if err := godotenv.Load("../../.env"); err != nil {
+	if err := godotenv.Load("../../cmd/server/.env"); err != nil {
 		log.Println("Error loading .env file, falling back to system environment variables")
 	}
 
