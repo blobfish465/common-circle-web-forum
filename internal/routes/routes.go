@@ -39,6 +39,16 @@ func GetPublicRoutes() func(r chi.Router) {
 			json.NewEncoder(w).Encode(response)
 		})
 
+		r.Get("/threads/{id}", func(w http.ResponseWriter, req *http.Request) {
+			response, err := threads.HandleGetThreadByID(w, req)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Error: %s", err.Error()), http.StatusInternalServerError)
+				return
+			}
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(response)
+		})
+
 		r.Get("/threads/{thread_id}/comments", func(w http.ResponseWriter, req *http.Request) {
 			response, err := comments.HandleListCommentsByThread(w, req)
 			if err != nil {
@@ -124,16 +134,6 @@ func GetPrivateRoutes(r chi.Router) {
 
 	r.Delete("/users/{id}", func(w http.ResponseWriter, req *http.Request) {
 		users.HandleDeleteUser(w, req)
-	})
-
-	r.Get("/threads/{id}", func(w http.ResponseWriter, req *http.Request) {
-		response, err := threads.HandleGetThreadByID(w, req)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error: %s", err.Error()), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(response)
 	})
 
 	r.Put("/threads/{id}", func(w http.ResponseWriter, req *http.Request) {
