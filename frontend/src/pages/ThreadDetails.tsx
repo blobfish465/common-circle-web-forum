@@ -11,7 +11,7 @@ import { useAuth } from '../context/AuthContext';
 
 const ThreadDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { userId } = useAuth();
+  const { userId, token } = useAuth();
   const [thread, setThread] = useState<Thread | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [categoryName, setCategoryName] = useState<string | null>(null);
@@ -26,10 +26,12 @@ const ThreadDetails: React.FC = () => {
         const fetchedThread = threadRes.data.payload.data;
         setThread(fetchedThread);
 
-        // Fetch the user details based on user_id from the thread
-        const userRes = await axiosInstance.get(`/users/${fetchedThread.user_id}`);
-        const user = userRes.data.payload.data;
-        setUsername(user.username); 
+        // Fetch the user details only if the user is logged in
+        if (token) {
+          const userRes = await axiosInstance.get(`/users/${fetchedThread.user_id}`);
+          const user = userRes.data.payload.data;
+          setUsername(user.username);
+        } 
 
         // Fetch the category details based on category_id from the thread
         const categoryRes = await axiosInstance.get(`/categories/${fetchedThread.category_id}`);
@@ -47,7 +49,7 @@ const ThreadDetails: React.FC = () => {
     };
 
     if (id) fetchThread();
-  }, [id]);
+  }, [id, token]);
 
   // Update comment list of the thread by adding the new comment to the list
   const handleCommentAdded = (newComment: Comment) => {
