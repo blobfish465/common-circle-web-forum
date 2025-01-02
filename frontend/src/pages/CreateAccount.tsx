@@ -28,6 +28,7 @@ const CreateAccount: React.FC = () => {
       sx={{
         maxWidth: 400,
         margin: '0 auto',
+        marginTop: 4, 
         padding: 2,
         border: '1px solid #ccc',
         borderRadius: 4,
