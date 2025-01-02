@@ -17,6 +17,16 @@ func GetPublicRoutes() func(r chi.Router) {
 	return func(r chi.Router) {
 		r.Post("/login", auth.Login) 
 
+		r.Get("/users/{id}", func(w http.ResponseWriter, req *http.Request) {
+			response, err := users.HandleGetUserByID(w, req)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Error: %s", err.Error()), http.StatusInternalServerError)
+				return
+			}
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(response)
+		})
+
 		r.Post("/users", func(w http.ResponseWriter, req *http.Request) {
 			response, err := users.HandleCreateUsers(w, req)
 			if err != nil {
@@ -111,16 +121,6 @@ func GetPublicRoutes() func(r chi.Router) {
 
 // GetPrivateRoutes sets up private routes requiring authentication
 func GetPrivateRoutes(r chi.Router) {
-
-	r.Get("/users/{id}", func(w http.ResponseWriter, req *http.Request) {
-			response, err := users.HandleGetUserByID(w, req)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Error: %s", err.Error()), http.StatusInternalServerError)
-				return
-			}
-			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(response)
-		})
 
 	r.Get("/users/{userId}/threads", func(w http.ResponseWriter, req *http.Request) {
 		response, err := threads.HandleListThreadsByUser(w, req)
