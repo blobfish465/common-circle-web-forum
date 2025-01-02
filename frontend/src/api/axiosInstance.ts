@@ -14,10 +14,14 @@ axiosInstance.interceptors.request.use(
       const token = Cookies.get('authToken'); // Retrieve token from cookies
       console.log('Auth token:', Cookies.get('authToken'));
       console.log('Token attached to request:', token);
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`;
-        }
-        return config;
+      const isPrivateRoute = config.url?.startsWith('/users') || config.url?.startsWith('/threads') && config.method !== 'get';
+      if (token && isPrivateRoute) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+        console.log('Token attached to private route:', config.url);
+      } else {
+          console.log('No token needed for public route:', config.url);
+      }
+      return config;
     },
     (error) => Promise.reject(error)
   );
