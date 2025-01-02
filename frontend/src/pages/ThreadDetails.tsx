@@ -13,7 +13,7 @@ const ThreadDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { userId, token } = useAuth();
   const [thread, setThread] = useState<Thread | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>('Login to see who posted this thread');
   const [categoryName, setCategoryName] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -82,7 +82,7 @@ const ThreadDetails: React.FC = () => {
     return <Typography color="error">{error}</Typography>;
   }
 
-  if (!thread || !username) {
+  if (!thread) {
     return <Typography>Loading...</Typography>;
   }
 
