@@ -29,9 +29,9 @@ func GetDB() (*Database, error) {
 		log.Println("Error opening database connection:", err)
         return nil, err
     }
-    db.SetMaxOpenConns(1000)
-    db.SetMaxIdleConns(500)
-    db.SetConnMaxLifetime(30 * time.Minute)
+    db.SetMaxOpenConns(10)
+    db.SetMaxIdleConns(5)
+    db.SetConnMaxLifetime(10 * time.Minute)
 
     err = setupTables(db)
     if err != nil {
