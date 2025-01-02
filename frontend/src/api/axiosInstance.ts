@@ -12,14 +12,8 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     (config) => {
       const token = Cookies.get('authToken'); // Retrieve token from cookies
-      console.log('Auth token:', Cookies.get('authToken'));
-      console.log('Token attached to request:', token);
-      const isPrivateRoute = config.url?.startsWith('/users') || config.url?.startsWith('/threads') && config.method !== 'get';
-      if (token && isPrivateRoute) {
+      if (token && config.url && (config.url.startsWith('/users') || config.url.startsWith('/threads') && config.method !== 'get')) {
         config.headers['Authorization'] = `Bearer ${token}`;
-        console.log('Token attached to private route:', config.url);
-      } else {
-          console.log('No token needed for public route:', config.url);
       }
       return config;
     },
