@@ -10,17 +10,13 @@ const axiosInstance = axios.create({
 
 // Add an interceptor to include the token in the Authorization header
 axiosInstance.interceptors.request.use(
-    (config) => {
-      const token = Cookies.get('authToken'); // Retrieve token from cookies
-      if (
-        token &&
-        config.url &&
-        ((config.url.startsWith('/users') || config.url.startsWith('/threads')) && config.method !== 'get')
-      ) {
+  (config) => {
+    const token = Cookies.get('authToken');
+    if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
-      }
-      return config;
-    },
+    }
+    return config;
+  },
     (error) => Promise.reject(error)
   );
 
